@@ -1,0 +1,40 @@
+Rovio Challenge
+
+Code Design
+	- Fairly simple, didn't want to go overboard for a simpler game like asteroids
+	- Mostly "manager" designs - having objects that manage the score, player movement, and obstacle generation vs more scattered approach.
+	- Initially was thinking of using object pooling for the asteroids and the bullets, but....
+			- Didn't like object pooling for asteroids (reduces variety of asteroid shapes and asteroid limit is in the game anyway)
+			- Bullets aren't very processor-using heavy
+	- Initially wanted to rely more heavily on SendMessage instead of keeping references, but recognized it was probably better to 
+      just use references. Wouldn't be that much of an issue and the reference never gets deleted anyway.
+    - Try to mitigate public variables and rely on SerializeField to edit in editor
+	
+Challenges
+	- I don't typically use the Unity animator, but I went to use it for the player animation switch between the explosion effect and regular ship sprite. I ran into some trouble wrangling
+		the animator there (had to redo animator later)
+	- Fixing the player movement from using rigidbody addTorque to a smoother movement - adding torque felt too floaty and not as close to the original asteroids game as I wanted.
+	- UFO movement and trying to get an accurate tracking shot from the smaller UFOs
+	- Asteroid generation on the fly (rather than having sprites, create procedural meshes and assign those as asteroids so no sprites need to be made), but this didn't work out so I switched back to sprites
+
+Decisions
+	- Main decision was trying to make it similar to the Asteroids arcade game, but with some changes (so not a 100% remake).
+	- Kept the asteroids on screen limit (26) since that felt like a good limit to include to prevent the screen from getting too cluttered with obstacles.
+	- Dropped the shot limit (in asteroids you can only have 4 shots on screen at a time) - it feels way better to smash the spacebar to make shots.
+	- Removed shots wrapping around the screen - felt busy with all of the other obstacles on screen as well, and with no shot limit it can get hectic
+	- Really liked the player movement - sharp turns and a little time to actually start thrusting away.
+	- Dropped the hyperspace button - felt wanting to make it more skill testing vs. relying on RNG to save yourself if needed.
+	- Polygon Colliders on the sprites (except the UFOs) for collisions for more precise collisions (not remaking/regenerating colliders during gameplay anyway)
+	- Originally wanted to do custom generated asteroids using Unity Mesh tools (some remnants of that are still in the project of messing with meshes, but isn't affecting the game) ,
+		but didn't have enough research/experience to go off. Will definitely try to make it on my own time in the future.
+	
+	
+	
+HOW TO RUN THE GAME
+Double click the "Asteroids for Rovio" executable file to run it.
+
+CONTROLS
+W or Up Arrow to move up
+S or Down Arrow to move down
+A & D or Left & Right arrows to rotate
+Spacebar to shoot
